@@ -1,0 +1,363 @@
+/* ==========================================================================
+   Hearth & Hibiscus · Landingspagina (VERSIE-6)
+   Mobile-first. Kleuren en fonts volgens Brandmap VERSIE-10.
+   ========================================================================== */
+
+:root {
+  /* Merkpalet */
+  --oker: #998648;       /* hoofdkleur: grote vlakken en grote koppen */
+  --oker-50: #F7F5ED;
+  --oker-100: #EFEBDC;
+  --oker-600: #7C6D39;   /* lichtste oker voor tekst op crème (4,6:1) */
+  --oker-700: #66592E;
+  --creme: #F8F1E4;      /* standaardachtergrond */
+  --bes: #7D0507;        /* lopende tekst */
+  --hib: #C00F3D;        /* enkel de primaire knop (witte tekst) en foutmeldingen */
+  --hib-donker: #9E0C32;
+  --abr: #F39668;        /* accent: stickers, highlights */
+  --lijn: #E6DAC2;
+  --wit: #FFFFFF;
+
+  /* Smaaktinten (100 / 500 / 900) */
+  --green-100: #EFF1E8; --green-500: #C6CEAC; --green-900: #5A643B;
+  --cham-100: #F9F4E6;  --cham-500: #EAD8A7;  --cham-900: #886C20;
+  --ginger-100: #FAE5CF; --ginger-500: #EEA354; --ginger-900: #7B450C;
+  --rooi-100: #EABCC6;  --rooi-500: #952E46;  --rooi-900: #3F131D;
+
+  /* Typografie */
+  --f-kop: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+  --f-tekst: "DM Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --radius: 18px;
+  --gutter: 20px;
+  --max: 1120px;
+}
+
+/* ---------- Basis ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--creme);
+  color: var(--bes);
+  font-family: var(--f-tekst);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+[hidden] { display: none !important; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-kop); margin: 0; line-height: 1.05; letter-spacing: -0.01em; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+:focus-visible { outline: 3px solid var(--oker-600); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.wrap--smal { max-width: 760px; }
+.midden { display: flex; justify-content: center; }
+
+.skip { position: absolute; left: -999px; top: 8px; background: var(--bes); color: var(--creme); padding: 10px 14px; border-radius: 8px; z-index: 100; }
+.skip:focus { left: 8px; }
+
+section { padding: 64px 0; }
+.kop { font-weight: 800; font-size: clamp(2rem, 7vw, 3.25rem); color: var(--bes); max-width: 18ch; }
+.kop--creme { color: var(--creme); }
+.kop--oker { color: var(--oker-700); }
+.lead { margin-top: 16px; font-size: 1.125rem; max-width: 56ch; }
+
+/* ---------- Knoppen ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 14px 28px;
+  border-radius: 999px; border: 2px solid transparent;
+  font-family: var(--f-tekst); font-weight: 600; font-size: 1.0625rem; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.btn--primair { background: var(--hib); color: var(--wit); box-shadow: 0 4px 0 var(--hib-donker); }
+.btn--primair:hover { background: var(--hib-donker); }
+.btn--primair:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--hib-donker); }
+.btn--lijn { background: transparent; color: var(--bes); border-color: var(--bes); }
+.btn--lijn:hover { background: var(--bes); color: var(--creme); }
+.btn--klein { min-height: 44px; padding: 10px 18px; font-size: .9375rem; }
+.btn--breed { width: 100%; }
+.btn[disabled] { opacity: .7; cursor: progress; }
+
+.link { font-weight: 600; text-underline-offset: 4px; }
+.link--creme { color: var(--creme); }
+
+/* ---------- Stickers (vaste kleuren: abrikoos + bes) ---------- */
+.sticker {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--abr); color: var(--bes);
+  font-family: var(--f-kop); font-weight: 800; line-height: 1;
+  border-radius: 999px;
+}
+.sticker--hero {
+  position: absolute; right: 4%; top: -22%;
+  width: 70px; height: 70px; font-size: .9375rem;
+  transform: rotate(-10deg); z-index: 2;
+  box-shadow: 0 6px 14px rgba(125, 5, 7, .18);
+}
+.sticker--klein { padding: 10px 18px; font-size: 1.125rem; transform: rotate(-6deg); vertical-align: middle; margin-right: 10px; }
+
+/* ---------- 1. Navigatie ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(248, 241, 228, .94);
+  backdrop-filter: saturate(1.2) blur(8px);
+  border-bottom: 1px solid var(--lijn);
+}
+.nav__in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.nav__logo img { height: 40px; width: auto; }
+.nav__links { display: none; list-style: none; gap: 28px; }
+.nav__links a { text-decoration: none; font-weight: 500; }
+.nav__links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- 2. Hero ---------- */
+.hero { padding: 36px 0 56px; overflow: hidden; }
+.hero__in { display: grid; gap: 40px; }
+.hero__kop { font-weight: 800; font-size: clamp(2.6rem, 11vw, 4.75rem); color: var(--bes); max-width: 13ch; }
+.hero__sub { margin-top: 18px; font-size: 1.1875rem; max-width: 34ch; }
+.hero__tekst .btn { margin-top: 28px; }
+.hero__klein { margin-top: 12px; font-size: .9375rem; color: var(--oker-700); }
+.hero__beeld { position: relative; margin-top: 64px; }
+.hero__bloem {
+  position: absolute; z-index: 0;
+  width: 78%; left: 11%; top: -48%;
+  opacity: .9; transform: rotate(-12deg);
+}
+.hero__foto { position: relative; z-index: 1; width: 100%; filter: drop-shadow(0 18px 20px rgba(79, 68, 34, .25)); }
+
+/* ---------- 3. Intro ---------- */
+.intro { background: var(--oker-50); }
+.troeven { list-style: none; display: grid; gap: 16px; margin-top: 36px; }
+.troef { background: var(--wit); border: 1px solid var(--lijn); border-radius: var(--radius); padding: 24px; }
+.troef__icoon { display: inline-flex; width: 56px; height: 56px; align-items: center; justify-content: center; border-radius: 50%; background: var(--abr); color: var(--bes); margin-bottom: 14px; }
+.troef h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+
+/* ---------- 4. Smaken ---------- */
+.smaken { background: var(--wit); }
+.kaarten {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 82%;
+  gap: 16px; margin: 32px 0 36px;
+  padding: 4px var(--gutter) 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter);
+  scrollbar-width: thin;
+}
+.kaart {
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  border-radius: var(--radius); overflow: hidden;
+  background: var(--k500); color: var(--k900);
+}
+.kaart__label { padding: 22px 22px 0; font-size: .8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.kaart__kop { padding: 4px 22px 0; font-size: 2.25rem; font-weight: 800; }
+.kaart__tekst { padding: 10px 22px 0; }
+.kaart__foto { width: 78%; margin: 18px auto 18px; aspect-ratio: 1 / .85; object-fit: contain; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+.kaart__tip { margin-top: auto; padding: 16px 22px 20px; background: var(--k100); }
+
+/* Smaak = enkel tinten van die smaak (Brandmap 08). Rooibos: kop in 100 op 500, tekstvakjes in 100 met tekst 900. */
+.kaart--green     { --k100: var(--green-100);  --k500: var(--green-500);  --k900: var(--green-900); }
+.kaart--chamomile { --k100: var(--cham-100);   --k500: var(--cham-500);   --k900: var(--cham-900); }
+.kaart--ginger    { --k100: var(--ginger-100); --k500: var(--ginger-500); --k900: var(--ginger-900); }
+.kaart--rooibos   { --k100: var(--rooi-100);   --k500: var(--rooi-500);   --k900: var(--rooi-100); }
+.kaart--rooibos .kaart__tip { background: var(--rooi-100); color: var(--rooi-900); }
+/* De beschrijving staat op het 500-vlak: kleine tekst in 900 haalt daar geen 4,5:1, dus die staat iets groter en vetter. */
+.kaart__tekst { font-size: 1.125rem; font-weight: 500; }
+.kaart--green .kaart__tekst, .kaart--chamomile .kaart__tekst, .kaart--ginger .kaart__tekst, .kaart--rooibos .kaart__tekst { background: var(--k100); margin: 14px 22px 0; padding: 12px 14px; border-radius: 12px; }
+
+/* ---------- 5. Zo drink je 'm ---------- */
+.drinken { background: var(--creme); }
+.recepten { display: grid; gap: 32px 20px; margin-top: 44px; }
+.recept { background: var(--wit); border: 1px solid var(--lijn); border-radius: var(--radius); padding: 36px 24px 24px; }
+.recept__kop { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+.recept { position: relative; }
+.recept__kop .sticker--klein { position: absolute; top: -16px; left: -12px; margin: 0; width: 96px; padding-inline: 0; transform: rotate(-10deg); box-shadow: 0 3px 8px rgba(125,5,7,.15); }
+.recept ol { list-style: none; counter-reset: stap; display: grid; gap: 12px; }
+.recept li { counter-increment: stap; display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
+.recept li::before {
+  content: counter(stap);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--oker); color: var(--creme);
+  font-family: var(--f-kop); font-weight: 800;
+}
+.drinken__foto { width: min(420px, 85%); margin: 40px auto 0; filter: drop-shadow(0 14px 16px rgba(79, 68, 34, .22)); }
+
+/* ---------- 6. Samen ---------- */
+.samen { background: var(--oker-700); color: var(--creme); }
+.samen__top { display: grid; gap: 28px; }
+.samen__beeld { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
+.insta__label { margin-top: 40px; font-family: var(--f-kop); font-weight: 700; font-size: 1.125rem; }
+.insta { list-style: none; display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; margin: 16px calc(var(--gutter) * -1) 28px; padding: 4px var(--gutter) 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); }
+.insta > li { scroll-snap-align: start; }
+/* Instagram-mockup */
+.ig { background: #fff; color: #262626; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,.18); font-size: .8125rem; line-height: 1.35; }
+.ig__kop { display: flex; align-items: center; gap: 8px; padding: 9px 12px; }
+.ig__avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: contain; background: var(--creme); padding: 3px; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--abr); }
+.ig__naam { font-weight: 700; }
+.ig__meer { margin-left: auto; letter-spacing: 1px; font-size: .75rem; }
+.ig__beeld { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.ig__onder { padding: 8px 12px 12px; }
+.ig__acties { display: flex; gap: 12px; }
+.ig__acties svg { width: 22px; height: 22px; fill: none; stroke: #262626; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.ig__acties .ig__bewaar { margin-left: auto; }
+.ig__likes { margin-top: 6px; font-weight: 700; }
+.ig__tekst { margin-top: 2px; }
+
+/* ---------- 7. Formulier ---------- */
+.doemee { background: var(--oker-100); }
+.doemee__in { display: grid; gap: 28px; }
+.formblok { background: var(--wit); border-radius: var(--radius); padding: 24px; box-shadow: 0 10px 30px rgba(79, 68, 34, .12); }
+.form { display: grid; gap: 18px; }
+.veld label { display: block; font-weight: 600; margin-bottom: 6px; }
+.veld input[type="text"], .veld input[type="email"] {
+  width: 100%; min-height: 52px; padding: 12px 16px;
+  font: inherit; color: var(--bes);
+  background: var(--creme); border: 2px solid var(--lijn); border-radius: 12px;
+  transition: border-color .15s ease;
+}
+.veld input::placeholder { color: #9b7a6b; }
+.veld input:focus { outline: none; border-color: var(--oker-600); }
+.veld input[aria-invalid="true"] { border-color: var(--hib); }
+.veld--check { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+.veld--check input { width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--hib); }
+.veld--check label { font-weight: 400; font-size: .9375rem; margin: 0; }
+.veld--check .fout { grid-column: 1 / -1; }
+.fout { color: var(--hib); font-size: .9375rem; font-weight: 600; margin-top: 6px; }
+.fout:empty { display: none; }
+.form__klein { font-size: .875rem; color: var(--oker-700); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.succes { text-align: center; display: grid; justify-items: center; gap: 12px; padding: 12px 0; }
+.succes:focus { outline: none; }
+.succes img { width: 110px; }
+.succes__kop { font-size: 2rem; font-weight: 800; }
+.succes .btn { margin-top: 8px; }
+
+/* ---------- 8. FAQ ---------- */
+.faq { background: var(--creme); }
+.faq .kop { margin-bottom: 24px; }
+details { border-top: 1px solid var(--lijn); }
+details:last-of-type { border-bottom: 1px solid var(--lijn); }
+summary {
+  list-style: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 0; min-height: 56px;
+  font-family: var(--f-kop); font-weight: 700; font-size: 1.1875rem;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.75rem; line-height: 1; color: var(--oker-600); transition: transform .32s cubic-bezier(.4, 0, .2, 1); }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 20px; max-width: 60ch; transition: opacity .32s ease, transform .32s ease; }
+/* met JS: plusje en tekst volgen de klasse is-open, zodat ook het dichtgaan zacht verloopt */
+.js-faq details[open]:not(.is-open) summary::after { transform: none; }
+.js-faq details:not(.is-open) p { opacity: 0; transform: translateY(-6px); }
+
+/* ---------- 9. Footer ---------- */
+.footer { background: var(--bes); color: var(--creme); padding: 48px 0 40px; text-align: center; }
+.footer__in { display: grid; justify-items: center; gap: 16px; }
+.footer__logo { width: 120px; }
+.footer__slogan { font-family: var(--f-kop); font-weight: 800; font-size: 1.5rem; }
+.footer__links { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
+.footer__links a { display: inline-block; padding: 8px 0; text-underline-offset: 4px; }
+.footer__klein { font-size: .8125rem; opacity: .85; max-width: 46ch; }
+
+/* ==========================================================================
+   Grotere schermen
+   ========================================================================== */
+@media (min-width: 640px) {
+  :root { --gutter: 32px; }
+  .troeven { grid-template-columns: repeat(3, 1fr); }
+  .recepten { grid-template-columns: repeat(2, 1fr); }
+  .insta { grid-auto-columns: 44%; }
+  .kaarten { grid-auto-columns: 46%; }
+}
+
+@media (min-width: 900px) {
+  section { padding: 96px 0; }
+  .insta { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-inline: 0; padding: 0; overflow: visible; }
+  .samen__top { grid-template-columns: 1.2fr 1fr; align-items: center; gap: 56px; }
+  .samen__beeld { max-height: 560px; }
+  .nav__links { display: flex; }
+  .nav__logo img { height: 46px; }
+  .hero { padding: 64px 0 96px; }
+  .hero__in { grid-template-columns: 1fr 1.15fr; align-items: center; gap: 48px; }
+  .hero__beeld { margin-top: 0; }
+  .hero__bloem { top: -56%; }
+  .sticker--hero { top: -12%; width: 92px; height: 92px; font-size: 1.25rem; }
+  .kaarten {
+    grid-auto-flow: row; grid-template-columns: repeat(4, 1fr);
+    max-width: var(--max); margin-left: auto; margin-right: auto;
+    overflow: visible; padding-top: 0;
+  }
+  .doemee__in { grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
+  .formblok { padding: 36px; }
+  .drinken .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0 48px; align-items: stretch; }
+  .drinken .kop { grid-column: 1 / -1; margin-bottom: 44px; }
+  .drinken .recepten { margin-top: 0; }
+  /* foto even hoog als de receptkaarten */
+  .drinken__foto { width: 100%; margin: 0; height: 0; min-height: 100%; object-fit: cover; object-position: center 62%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+.kaart--rooibos .kaart__tekst { color: var(--rooi-900); }
+.drinken__foto--scene { filter: none; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(79, 68, 34, .18); }
+
+/* ==========================================================================
+   Smaakquiz (pop-up) · VERSIE-11
+   ========================================================================== */
+.quizstart { flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.quizstart__klein { font-size: .9375rem; color: var(--oker-700); max-width: 34ch; }
+body.quiz-open { overflow: hidden; }
+
+.quiz {
+  width: min(520px, calc(100% - 24px)); max-height: calc(100dvh - 24px);
+  padding: 0; border: 0; border-radius: 24px;
+  background: var(--creme); color: var(--bes);
+  box-shadow: 0 24px 60px rgba(63, 19, 29, .35);
+  overflow: auto;
+}
+.quiz::backdrop { background: rgba(63, 19, 29, .55); }
+.quiz__in { padding: 20px 22px 26px; }
+.quiz__top { display: flex; justify-content: space-between; align-items: center; }
+.quiz__stap { font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--oker-700); }
+.quiz__sluit {
+  width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--bes); font-size: 2rem; line-height: 1; cursor: pointer;
+}
+.quiz__sluit:hover { background: var(--oker-100); }
+.quiz__balk { height: 6px; margin: 10px 0 22px; border-radius: 99px; background: var(--oker-100); overflow: hidden; }
+.quiz__balk span { display: block; height: 100%; width: 0; background: var(--abr); border-radius: 99px; transition: width .3s ease; }
+.quiz__vraag { font-size: clamp(1.6rem, 6vw, 2rem); font-weight: 800; line-height: 1.1; outline: none; }
+.quiz__antwoorden { display: grid; gap: 10px; margin-top: 20px; }
+.quiz__antwoord {
+  min-height: 56px; padding: 14px 18px; text-align: left;
+  font: inherit; font-weight: 500; color: var(--bes);
+  background: var(--wit); border: 2px solid var(--lijn); border-radius: 14px; cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease, transform .1s ease;
+}
+.quiz__antwoord:hover { border-color: var(--abr); background: #FEF4EE; }
+.quiz__antwoord:active { transform: scale(.98); }
+
+/* Uitslag in de tinten van die smaak (Brandmap 08); knop blijft hibiscus */
+.quiz--uitslag { background: var(--k500); color: var(--k900); }
+.quiz--uitslag .quiz__stap, .quiz--uitslag .quiz__sluit { color: var(--k900); }
+.quiz--uitslag .quiz__sluit:hover { background: var(--k100); }
+.quiz--uitslag .quiz__balk { background: var(--k100); }
+.quiz__label { font-size: .8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.quiz__smaak { margin-top: 4px; }
+.quiz__tekst { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--k100); color: var(--k900t, var(--k900)); font-size: 1.0625rem; font-weight: 500; }
+.quiz__foto { width: 70%; margin: 16px auto; aspect-ratio: 1 / .85; object-fit: contain; filter: drop-shadow(0 10px 12px rgba(0,0,0,.18)); }
+.quiz__tip { margin-bottom: 18px; padding: 12px 14px; border-radius: 12px; background: var(--k100); color: var(--k900t, var(--k900)); }
+.quiz--green     { --k100: var(--green-100);  --k500: var(--green-500);  --k900: var(--green-900); }
+.quiz--chamomile { --k100: var(--cham-100);   --k500: var(--cham-500);   --k900: var(--cham-900); }
+.quiz--ginger    { --k100: var(--ginger-100); --k500: var(--ginger-500); --k900: var(--ginger-900); }
+.quiz--rooibos   { --k100: var(--rooi-100);   --k500: var(--rooi-500);   --k900: var(--rooi-100); --k900t: var(--rooi-900); }
+.quiz--rooibos .quiz__sluit:hover { background: rgba(234, 188, 198, .2); }
+.quiz--uitslag .quiz__balk span { background: var(--k900); }
